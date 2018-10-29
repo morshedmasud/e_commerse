@@ -104,11 +104,31 @@ venv.bak/
 .mypy_cache/
 
 
-..idea/*
+ vs code
+.vscode
 
 
+
+# Media file
+media/*
+
+!media/.keep
+
+# .DS_STORE
 .DS_Store
 
-# image file
+# Pipfile.lock
 
-static/img
+.idea
+
+
+
+# staticfiels!
+staticfiles/*
+
+.static/img/*
+
+
+*.xml
+
+*.iml
