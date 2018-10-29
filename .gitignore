@@ -115,7 +115,8 @@ media/*
 !media/.keep
 
 # .DS_STORE
-.DS_Store
+
+*.DS_Store
 
 # Pipfile.lock
 
@@ -126,7 +127,7 @@ media/*
 # staticfiels!
 staticfiles/*
 
-.static/img/*
+static/img/*
 
 
 *.xml
