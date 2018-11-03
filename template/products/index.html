@@ -18,7 +18,7 @@
 
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="{% static 'css/core-style.css' %}">
-    <link rel="stylesheet" href="{% static style.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 
 </head>
 
@@ -454,6 +454,16 @@
         </div>
     </div>
     <!-- ##### Brands Area End ##### -->
+
+    {% for i in products %}
+        <h1>{{ i.name }}</h1>
+        <h1>{{ i.category }}</h1>
+        <h1>{{ i.price }}</h1>
+        {% for img in i.pro_images.all() %}
+            <img src="{{ img.image.url }}">
+
+        {% endfor %}
+    {% endfor %}
 
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer_area clearfix">

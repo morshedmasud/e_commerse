@@ -6,9 +6,10 @@ name = "pypi"
 [dev-packages]
 
 [packages]
-django = "*"
 "psycopg2" = "*"
 "psycopg2-binary" = "*"
+pillow = "*"
+django = "==2.1"
 
 [requires]
 python_version = "3.6"
