@@ -4,8 +4,12 @@ from .models import Products
 
 
 def index(request):
-    products = Products.objects.all()
-    return render(request, 'base.html', {'products': products})
+    products = Products.objects.all().reverse()
+    context = {
+        "products": products,
+
+    }
+    return render(request, 'products/index.html', context)
 
 
 # def product_list(request):
