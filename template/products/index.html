@@ -103,9 +103,16 @@
                         <div class="owl-item active" style="width: 210px; margin-right: 30px;"><div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="{% static 'img/product-img/product-4.jpg' %}" alt="">
-                                <!-- Hover Thumb -->
-                                <img class="hover-img" src="{% static 'img/product-img/product-5.jpg' %}" alt="">
+                                {% for img in images %}
+                                    {% if forloop.first %}
+                                        <img class="img-fluid" src="{{ img.image.url }}">
+                                    {% endif %}
+                                    <img class="hover-img" src="{{ img.image.url }}">
+                                {% endfor %}
+{#                                <img src="{% static 'img/product-img/product-4.jpg' %}" alt="">#}
+{#                                <!-- Hover Thumb -->#}
+{#                                <img class="hover-img" src="{% static 'img/product-img/product-5.jpg' %}" alt="">#}
+
 
                                 <!-- Product Badge -->
                                 <div class="product-badge new-badge">
@@ -139,6 +146,7 @@
             </div>
         </div>
     </section>
+
 {% endblock %}
 
 
