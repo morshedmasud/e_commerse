@@ -5,17 +5,18 @@ from django.utils import timezone
 # Create your models here.
 
 class Collection(models.Model):
-    name = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class ProductCategory(models.Model):
-    name = models.CharField(max_length=100)
+    which_people = models.ForeignKey(Collection, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class Brand(models.Model):
@@ -25,26 +26,12 @@ class Brand(models.Model):
         return self.name
 
 
-class Color(models.Model):
-    color = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.color
-
-
-class Size(models.Model):
-    size = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.size
-
-
 class Products(models.Model):
     name = models.CharField(max_length=200)
     for_people = models.ForeignKey(Collection, on_delete=models.CASCADE)
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField()
-    # image = models.ImageField(upload_to='product_img/')
     old_price = models.FloatField(null=True, blank=True)
     price = models.FloatField()
     input_date = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -60,3 +47,19 @@ class Image(models.Model):
 
     def __str__(self):
         return self.product_name.name + 'image'
+
+
+class Color(models.Model):
+    which_product = models.ForeignKey(Products, on_delete=models.CASCADE)
+    color = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.color
+
+
+class Size(models.Model):
+    which_product = models.ForeignKey(Products, on_delete=models.CASCADE)
+    size = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.size

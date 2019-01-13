@@ -2,9 +2,22 @@
 
 {% endblock %}
 
+{% block navbar %}
+{% for clt in collections %}
+<ul class="single-mega cn-col-4">
+  <li class="title">{{ clt.title }}</li>
+  {% for cat in categorys %}
+  {% if clt == cat.which_people %}
+  <li><a href="">{{ cat.title }}</a></li>
+  {% endif %}
+  {% endfor %}
+</ul>
+{% endfor %}
+{% endblock %}
 
 {#   for index page   #}
 {% block welcome_area %}
+
 {% endblock %}
 
 {% block small_collection %}
@@ -23,9 +36,10 @@
 {% endblock %}
 
 
-{#   for shop page #}
+{# for shop page #}
 
 {% block coverpage_shop %}
+
 {% endblock %}
 
 {% block shob_body %}

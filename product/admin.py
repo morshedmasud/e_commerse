@@ -3,16 +3,42 @@ from .models import ProductCategory, Collection, Brand, Size, Color, Products, I
 # Register your models here.
 
 
-admin.site.register(ProductCategory)
+class ProductCategoryAdmin(admin.ModelAdmin):
+    list_display = ['which_people', 'title']
+
+
+admin.site.register(ProductCategory, ProductCategoryAdmin)
 admin.site.register(Collection)
 admin.site.register(Brand)
 admin.site.register(Size)
 admin.site.register(Color)
 
 
-class ProductAdmin(admin.ModelAdmin):
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ['product_name', 'image']
 
+
+admin.site.register(Image, ImageAdmin)
+
+
+class ProductImageInline(admin.TabularInline):
+    model = Image
+    extra = 2
+
+
+class ProductSizeInline(admin.TabularInline):
+    model = Size
+    extra = 3
+
+
+class ProductColorAdmin(admin.TabularInline):
+    model = Color
+    extra = 3
+
+
+class ProductAdmin(admin.ModelAdmin):
     list_display = ['name', 'for_people', 'category', 'price', 'input_date']
+    inlines = [ProductImageInline, ProductSizeInline, ProductColorAdmin]
 
     class Meta:
         Model = Products
@@ -21,9 +47,5 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(Products, ProductAdmin)
 
 
-class ImageAdmin(admin.ModelAdmin):
-    list_display = ['product_name', 'image']
 
-
-admin.site.register(Image, ImageAdmin)
 

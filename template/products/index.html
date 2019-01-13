@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 
 {% load static %}
@@ -8,10 +7,24 @@
 
 {% endblock %}
 
+{% block navbar %}
+    {% for clt in collections %}
+        <ul class="single-mega cn-col-4">
+            <li class="title">{{ clt.title }}</li>
+            {% for cat in categorys %}
+                {% if clt == cat.which_people %}
+                    <li><a href="{% url 'product_list' cat.title cat.which_people %}">{{ cat.title }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endfor %}
+{% endblock %}
 
-{#   for index page   #}
+
+{# for index page #}
 {% block welcome_area %}
-    <section class="welcome_area bg-img background-overlay" style="background-image: url({% static 'img/bg-img/bg-1.jpg' %});">
+    <section class="welcome_area bg-img background-overlay"
+             style="background-image: url({% static 'img/bg-img/bg-1.jpg' %});">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
@@ -33,7 +46,8 @@
             <div class="row justify-content-center">
                 <!-- Single Catagory -->
                 <div class="col-12 col-sm-6 col-md-4">
-                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url({% static 'img/bg-img/bg-2.jpg' %});">
+                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img"
+                         style="background-image: url({% static 'img/bg-img/bg-2.jpg' %});">
                         <div class="catagory-content">
                             <a href="#">T-Shirt</a>
                         </div>
@@ -41,7 +55,8 @@
                 </div>
                 <!-- Single Catagory -->
                 <div class="col-12 col-sm-6 col-md-4">
-                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url({% static 'img/bg-img/bg-3.jpg' %});">
+                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img"
+                         style="background-image: url({% static 'img/bg-img/bg-3.jpg' %});">
                         <div class="catagory-content">
                             <a href="#">Shoes</a>
                         </div>
@@ -49,7 +64,8 @@
                 </div>
                 <!-- Single Catagory -->
                 <div class="col-12 col-sm-6 col-md-4">
-                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url({% static 'img/bg-img/bg-4.jpg' %});">
+                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img"
+                         style="background-image: url({% static 'img/bg-img/bg-4.jpg' %});">
                         <div class="catagory-content">
                             <a href="#">Accessories</a>
                         </div>
@@ -66,7 +82,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="cta-content bg-img background-overlay" style="background-image: url({% static 'img/bg-img/bg-5.jpg' %});">
+                    <div class="cta-content bg-img background-overlay"
+                         style="background-image: url({% static 'img/bg-img/bg-5.jpg' %});">
                         <div class="h-100 d-flex align-items-center justify-content-end">
                             <div class="cta--text">
                                 <h6>-60%</h6>
@@ -98,50 +115,56 @@
             <div class="row">
                 <div class="col-12">
                     <div class="popular-products-slides owl-carousel owl-theme owl-loaded">
-
                         <!-- Single Product -->
-                        <div class="owl-item active" style="width: 210px; margin-right: 30px;"><div class="single-product-wrapper">
-                            <!-- Product Image -->
-                            <div class="product-img">
-                                {% for img in images %}
-                                    {% if forloop.first %}
-                                        <img class="img-fluid" src="{{ img.image.url }}">
-                                    {% endif %}
-                                    <img class="hover-img" src="{{ img.image.url }}">
-                                {% endfor %}
-{#                                <img src="{% static 'img/product-img/product-4.jpg' %}" alt="">#}
-{#                                <!-- Hover Thumb -->#}
-{#                                <img class="hover-img" src="{% static 'img/product-img/product-5.jpg' %}" alt="">#}
+                        {% for prod in products %}
+                            <div class="owl-item active" style="width: 210px; margin-right: 30px;">
+                                <div class="single-product-wrapper">
+                                    <!-- Product Image -->
+                                        <div class="product-img">
+                                            {% for img in prod.pro_images.all %}
+                                                {% if forloop.first %}
+                                                    <img class="img-fluid" src="{{ img.image.url }}">
+                                                {% endif %}
+                                                <img class="hover-img" src="{{ img.image.url }}">
+                                            {% endfor %}
+                                            <!-- Product Badge -->
+                                            <div class="product-badge new-badge">
+                                                <span>New</span>
+                                            </div>
 
+                                            <!-- Favourite -->
+                                            <div class="product-favourite">
+                                                <a href="#" class="favme fa fa-heart"></a>
+                                            </div>
+                                        </div>
+                                    <!-- Product Description -->
+                                    <div class="product-description">
+                                        <span>{{ prod.brand }}</span>
+                                        <a href="single-product-details.html">
+                                            <h6>{{ prod.name }}</h6>
+                                        </a>
+                                        <p class="product-price">{{ prod.price }}</p>
 
-                                <!-- Product Badge -->
-                                <div class="product-badge new-badge">
-                                    <span>New</span>
-                                </div>
-
-                                <!-- Favourite -->
-                                <div class="product-favourite">
-                                    <a href="#" class="favme fa fa-heart"></a>
-                                </div>
-                            </div>
-                            <!-- Product Description -->
-                            <div class="product-description">
-                                <span>mango</span>
-                                <a href="single-product-details.html">
-                                    <h6>PETITE Belted Jumper Dress</h6>
-                                </a>
-                                <p class="product-price">$80.00</p>
-
-                                <!-- Hover Content -->
-                                <div class="hover-content">
-                                    <!-- Add to Cart -->
-                                    <div class="add-to-cart-btn">
-                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                        <!-- Hover Content -->
+                                        <div class="hover-content">
+                                            <!-- Add to Cart -->
+                                            <div class="add-to-cart-btn">
+                                                <a href="#" class="btn essence-btn">Add to Cart</a>
+                                            </div>
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
+                        {% endfor %}
+                        <div class="owl-controls">
+                            <div class="owl-nav">
+                                <div class="owl-prev" style="display: none;">prev</div>
+                                <div class="owl-next" style="display: none;">next</div>
+                            </div>
+                            <div style="display: none;" class="owl-dots"></div>
                         </div>
-                    </div><div class="owl-controls"><div class="owl-nav"><div class="owl-prev" style="display: none;">prev</div><div class="owl-next" style="display: none;">next</div></div><div style="display: none;" class="owl-dots"></div></div></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -153,20 +176,25 @@
 {% block brand_area %}
     <div class="brands-area d-flex align-items-center justify-content-between">
         <!-- Brand Logo -->
-        <div class="single-brands-logo">
-            <img src="{% static 'img/core-img/brand1.png' %}" alt="">
-        </div>
-        <div class="single-brands-logo">
-            <img src="{% static 'img/core-img/brand1.png' %}" alt="">
-        </div>
-        <div class="single-brands-logo">
-            <img src="{% static 'img/core-img/brand1.png' %}" alt="">
-        </div>
+        {% for b in brand %}
+            <div class="single-brands-logo">
+                <a href=""><h4>{{ b.name }}</h4></a>
+
+                <!-- <img src="{% static 'img/core-img/brand1.png' %}" alt=""> -->
+            </div>
+        {% endfor %}
+
+        <!-- <div class="single-brands-logo">
+    <img src="{% static 'img/core-img/brand1.png' %}" alt="">
+  </div>
+  <div class="single-brands-logo">
+    <img src="{% static 'img/core-img/brand1.png' %}" alt="">
+  </div> -->
     </div>
 {% endblock %}
 
 
-{#   for shop page #}
+{# for shop page #}
 
 {% block coverpage_shop %}
 
@@ -177,7 +205,7 @@
 {% endblock %}
 
 
-{#  single product page #}
+{# single product page #}
 
 {% block singel_page %}
 
