@@ -7,16 +7,7 @@
 {% endblock %}
 
 {% block navbar %}
-    {% for clt in collections %}
-        <ul class="single-mega cn-col-4">
-            <li class="title">{{ clt.title }}</li>
-            {% for cat in categorys %}
-                {% if clt == cat.which_people %}
-                    <li><a href="{% url 'product_list' cat.title cat.which_people %}">{{ cat.title }}</a></li>
-                {% endif %}
-            {% endfor %}
-        </ul>
-    {% endfor %}
+
 {% endblock %}
 
 {#   for index page   #}
@@ -48,7 +39,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="page-title text-center">
-                        <h2>dresses</h2>
+                        <h2>{{ product_title }}</h2>
                     </div>
                 </div>
             </div>
@@ -196,7 +187,7 @@
                                 <div class="product-topbar d-flex align-items-center justify-content-between">
                                     <!-- Total Products -->
                                     <div class="total-products">
-                                        <p><span>186</span> products found</p>
+                                        <p><span>{{ products.count }}</span> products found</p>
                                     </div>
                                     <!-- Sorting -->
                                     <div class="product-sorting d-flex">
@@ -226,15 +217,18 @@
                         {#                        ######  product Body  #######}
                         <div class="row">
                             <!-- Single Product -->
-                            {% for pro in products %}
+                            {% for prod in products %}
                                 <div class="col-12 col-sm-6 col-lg-4">
                                     <div class="single-product-wrapper">
                                         <!-- Product Image -->
                                         <div class="product-img">
-                                            <img src="" alt="">
+                                            {% for img in prod.pro_images.all %}
+                                                {% if forloop.first %}
+                                                    <img src="{{ img.image.url }}" alt="">
+                                                {% endif %}
                                             <!-- Hover Thumb -->
-                                            <img class="hover-img" src="img/product-img/product-2.jpg" alt="">
-
+                                                <img class="hover-img" src="{{ img.image.url }}" alt="">
+                                            {% endfor %}
                                             <!-- Product Badge -->
                                             <div class="product-badge offer-badge">
                                                 <span>-30%</span>
@@ -247,11 +241,16 @@
 
                                         <!-- Product Description -->
                                         <div class="product-description">
-                                            <span>topshop</span>
+                                            <span>{{ prod.brand }}</span>
                                             <a href="single-product-details.html">
-                                                <h6>Knot Front Mini Dress</h6>
+                                                <h6>{{ prod.name }}</h6>
                                             </a>
-                                            <p class="product-price"><span class="old-price">$75.00</span> $55.00</p>
+                                            <p class="product-price">
+                                                {% if prod.old_price %}
+                                                <span class="old-price">${{ prod.old_price }}</span>
+                                                {% endif %}
+                                                ${{ prod.price }}
+                                            </p>
 
                                             <!-- Hover Content -->
                                             <div class="hover-content">
