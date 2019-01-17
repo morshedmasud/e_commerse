@@ -24,11 +24,12 @@ def product_list(request, cat_coll, cat_name):
     collections = models.Collection.objects.all()
     categorys = models.ProductCategory.objects.all()
     products = models.Products.objects.filter(for_people__title=cat_coll).filter(category__title=cat_name)
-
+    brands = models.Brand.objects.filter(products__category__title=cat_name)
     context = {
         "collections": collections,
         "categorys": categorys,
         "products": products,
-        "product_title": cat_name
+        "product_title": cat_name,
+        "brands": brands
     }
     return render(request, 'products/product_list.html', context)
