@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
+from django.db.models import Q
 from . import models
 # Create your views here.
 
@@ -9,6 +10,15 @@ def index(request):
     images = models.Image.objects.all()
     brand = models.Brand.objects.all()
     products = models.Products.objects.all()
+    search = request.GET.get('s')
+    print(search)
+    # if search:
+    #     products = models.Products.objects.filter(
+    #         Q(name__icontains=search)|
+    #         Q(description__icontains=search)|
+    #         Q(category__title__icontains=search)|
+    #         Q(brand__name__icontains=search)
+    #     )
 
     context = {
         "collections": collections,

@@ -95,9 +95,9 @@
         <div class="header-meta d-flex clearfix justify-content-end">
             <!-- Search Area -->
             <div class="search-area">
-                <form action="#" method="post">
-                    <input type="search" name="search" id="headerSearch" placeholder="Type for search" ,
-                           value="{{ request.GET.q }}">
+                <form method="GET">
+                    <input type="text" name="s" id="headerSearch" placeholder="Type for search" ,
+                           value="{{ request.GET.s }}">
                     <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </form>
             </div>
