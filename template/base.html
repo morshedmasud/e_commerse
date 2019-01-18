@@ -95,10 +95,11 @@
         <div class="header-meta d-flex clearfix justify-content-end">
             <!-- Search Area -->
             <div class="search-area">
-                <form method="GET">
+                <form action="{% url 'get_search' %}" method="POST">
+                    {% csrf_token %}
                     <input type="text" name="s" id="headerSearch" placeholder="Type for search" ,
-                           value="{{ request.GET.s }}">
-                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                           value="{{ request.POST.s }}">
+                    <button type="submit"  name="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </form>
             </div>
             <!-- Favourite Area -->

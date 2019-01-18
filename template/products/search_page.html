@@ -1,0 +1,290 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block stylesheet %}
+
+{% endblock %}
+
+{% block navbar %}
+
+{% endblock %}
+
+{#   for index page   #}
+{% block welcome_area %}
+
+{% endblock %}
+
+{% block small_collection %}
+{% endblock %}
+
+
+{% block offer_area %}
+{% endblock %}
+
+
+{% block popular_product %}
+{% endblock %}
+
+
+{% block brand_area %}
+{% endblock %}
+
+
+{# for shop page #}
+
+{% block coverpage_shop %}
+    <div class="breadcumb_area bg-img" style="background-image: url({% static "img/bg-img/breadcumb.jpg" %});">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="page-title text-center">
+                        <h2>Searching... Items</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block shob_body %}
+    <section class="shop_grid_area section-padding-80">
+        <div class="container">
+            <div class="row">
+                {#                ######      category section        ########}
+                <div class="col-12 col-md-4 col-lg-3">
+                    <div class="shop_sidebar_area">
+
+                        <!-- ##### Single Widget ##### -->
+                        <div class="widget catagory mb-50">
+                            <!-- Widget Title -->
+                            <h6 class="widget-title mb-30">Catagories</h6>
+
+                            <!--  Catagories  -->
+                            <div class="catagories-menu">
+                                <ul id="menu-content2" class="menu-content collapse show">
+                                    <!-- Single Item -->
+                                    <li data-toggle="collapse" data-target="#clothing">
+                                        <a href="#">clothing</a>
+                                        <ul class="sub-menu collapse show" id="clothing">
+                                            <li><a href="#">All</a></li>
+                                            <li><a href="#">Bodysuits</a></li>
+                                            <li><a href="#">Dresses</a></li>
+                                            <li><a href="#">Hoodies &amp; Sweats</a></li>
+                                            <li><a href="#">Jackets &amp; Coats</a></li>
+                                            <li><a href="#">Jeans</a></li>
+                                            <li><a href="#">Pants &amp; Leggings</a></li>
+                                            <li><a href="#">Rompers &amp; Jumpsuits</a></li>
+                                            <li><a href="#">Shirts &amp; Blouses</a></li>
+                                            <li><a href="#">Shirts</a></li>
+                                            <li><a href="#">Sweaters &amp; Knits</a></li>
+                                        </ul>
+                                    </li>
+                                    <!-- Single Item -->
+                                    <li data-toggle="collapse" data-target="#shoes" class="collapsed">
+                                        <a href="#">shoes</a>
+                                        <ul class="sub-menu collapse" id="shoes">
+                                            <li><a href="#">All</a></li>
+                                            <li><a href="#">Bodysuits</a></li>
+                                            <li><a href="#">Dresses</a></li>
+                                            <li><a href="#">Hoodies &amp; Sweats</a></li>
+                                            <li><a href="#">Jackets &amp; Coats</a></li>
+                                            <li><a href="#">Jeans</a></li>
+                                            <li><a href="#">Pants &amp; Leggings</a></li>
+                                            <li><a href="#">Rompers &amp; Jumpsuits</a></li>
+                                            <li><a href="#">Shirts &amp; Blouses</a></li>
+                                            <li><a href="#">Shirts</a></li>
+                                            <li><a href="#">Sweaters &amp; Knits</a></li>
+                                        </ul>
+                                    </li>
+                                    <!-- Single Item -->
+                                    <li data-toggle="collapse" data-target="#accessories" class="collapsed">
+                                        <a href="#">accessories</a>
+                                        <ul class="sub-menu collapse" id="accessories">
+                                            <li><a href="#">All</a></li>
+                                            <li><a href="#">Bodysuits</a></li>
+                                            <li><a href="#">Dresses</a></li>
+                                            <li><a href="#">Hoodies &amp; Sweats</a></li>
+                                            <li><a href="#">Jackets &amp; Coats</a></li>
+                                            <li><a href="#">Jeans</a></li>
+                                            <li><a href="#">Pants &amp; Leggings</a></li>
+                                            <li><a href="#">Rompers &amp; Jumpsuits</a></li>
+                                            <li><a href="#">Shirts &amp; Blouses</a></li>
+                                            <li><a href="#">Shirts</a></li>
+                                            <li><a href="#">Sweaters &amp; Knits</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- ##### Single Widget ##### -->
+                        <div class="widget price mb-50">
+                            <!-- Widget Title -->
+                            <h6 class="widget-title mb-30">Filter by</h6>
+                            <!-- Widget Title 2 -->
+                            <p class="widget-title2 mb-30">Price</p>
+
+                            <div class="widget-desc">
+                                <div class="slider-range">
+                                    <div data-min="49" data-max="360" data-unit="$"
+                                         class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+                                         data-value-min="49" data-value-max="360" data-label-result="Range:">
+                                        <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
+                                        <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"
+                                              style="left: 0%;"></span>
+                                        <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"
+                                              style="left: 100%;"></span>
+                                        <div class="ui-slider-range ui-corner-all ui-widget-header"
+                                             style="left: 0%; width: 100%;"></div>
+                                    </div>
+                                    <div class="range-price">Range: $49.00 - $360.00</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ##### Single Widget ##### -->
+                        <div class="widget color mb-50">
+                            <!-- Widget Title 2 -->
+                            <p class="widget-title2 mb-30">Color</p>
+                            <div class="widget-desc">
+                                <ul class="d-flex">
+                                    <li><a href="#" class="color1"></a></li>
+                                    <li><a href="#" class="color2"></a></li>
+                                    <li><a href="#" class="color3"></a></li>
+                                    <li><a href="#" class="color4"></a></li>
+                                    <li><a href="#" class="color5"></a></li>
+                                    <li><a href="#" class="color6"></a></li>
+                                    <li><a href="#" class="color7"></a></li>
+                                    <li><a href="#" class="color8"></a></li>
+                                    <li><a href="#" class="color9"></a></li>
+                                    <li><a href="#" class="color10"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- ##### Single Widget ##### -->
+                        <div class="widget brands mb-50">
+                            <!-- Widget Title 2 -->
+                            <p class="widget-title2 mb-30">Brands</p>
+                            <div class="widget-desc">
+                                <ul>
+                                    {% for brand in brands %}
+                                    <li><a href="#">{{ brand.name }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {#                ######    product show section      ########}
+                <div class="col-12 col-md-8 col-lg-9">
+                    <div class="shop_grid_product_area">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="product-topbar d-flex align-items-center justify-content-between">
+                                    <!-- Total Products -->
+                                    <div class="total-products">
+                                        <p><span>{{ products.count }}</span> products found</p>
+                                    </div>
+                                    <!-- Sorting -->
+                                    <div class="product-sorting d-flex">
+                                        <p>Sort by:</p>
+                                        <form action="#" method="get">
+                                            <select name="select" id="sortByselect" style="display: none;">
+                                                <option value="value">Highest Rated</option>
+                                                <option value="value">Newest</option>
+                                                <option value="value">Price: $$ - $</option>
+                                                <option value="value">Price: $ - $$</option>
+                                            </select>
+                                            <div class="nice-select" tabindex="0"><span
+                                                    class="current">Highest Rated</span>
+                                                <ul class="list">
+                                                    <li data-value="value" class="option selected">Highest Rated</li>
+                                                    <li data-value="value" class="option">Newest</li>
+                                                    <li data-value="value" class="option">Price: $$ - $</li>
+                                                    <li data-value="value" class="option">Price: $ - $$</li>
+                                                </ul>
+                                            </div>
+                                            <input type="submit" class="d-none" value="">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {#                        ######  product Body  #######}
+                        <div class="row">
+                            <!-- Single Product -->
+                            {% for prod in products %}
+                                <div class="col-12 col-sm-6 col-lg-4">
+                                    <div class="single-product-wrapper">
+                                        <!-- Product Image -->
+                                        <div class="product-img">
+                                            {% for img in prod.pro_images.all %}
+                                                {% if forloop.first %}
+                                                    <img src="{{ img.image.url }}" alt="">
+                                                {% endif %}
+                                            <!-- Hover Thumb -->
+                                                <img class="hover-img" src="{{ img.image.url }}" alt="">
+                                            {% endfor %}
+                                            <!-- Product Badge -->
+                                            <div class="product-badge offer-badge">
+                                                <span>-30%</span>
+                                            </div>
+                                            <!-- Favourite -->
+                                            <div class="product-favourite">
+                                                <a href="#" class="favme fa fa-heart"></a>
+                                            </div>
+                                        </div>
+
+                                        <!-- Product Description -->
+                                        <div class="product-description">
+                                            <span>{{ prod.brand }}</span>
+                                            <a href="single-product-details.html">
+                                                <h6>{{ prod.name }}</h6>
+                                            </a>
+                                            <p class="product-price">
+                                                {% if prod.old_price %}
+                                                <span class="old-price">${{ prod.old_price }}</span>
+                                                {% endif %}
+                                                ${{ prod.price }}
+                                            </p>
+
+                                            <!-- Hover Content -->
+                                            <div class="hover-content">
+                                                <!-- Add to Cart -->
+                                                <div class="add-to-cart-btn">
+                                                    <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- Pagination -->
+                    <nav aria-label="navigation">
+                        <ul class="pagination mt-50 mb-70">
+                            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">...</a></li>
+                            <li class="page-item"><a class="page-link" href="#">21</a></li>
+                            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{#  single product page #}
+
+{% block singel_page %}
+{% endblock %}

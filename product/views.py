@@ -10,16 +10,6 @@ def index(request):
     images = models.Image.objects.all()
     brand = models.Brand.objects.all()
     products = models.Products.objects.all()
-    search = request.GET.get('s')
-    print(search)
-    # if search:
-    #     products = models.Products.objects.filter(
-    #         Q(name__icontains=search)|
-    #         Q(description__icontains=search)|
-    #         Q(category__title__icontains=search)|
-    #         Q(brand__name__icontains=search)
-    #     )
-
     context = {
         "collections": collections,
         'categorys': categorys,
@@ -28,6 +18,28 @@ def index(request):
         "products": products,
     }
     return render(request, 'products/index.html', context)
+
+
+def get_search(request):
+    collections = models.Collection.objects.all()
+    categorys = models.ProductCategory.objects.all()
+    brands = models.Brand.objects.all()
+    search = request.POST.get('s')
+    print(search)
+    products = models.Products.objects.filter(
+        Q(name__icontains=search) |
+        Q(description__icontains=search) |
+        Q(category__title__icontains=search) |
+        Q(brand__name__icontains=search)
+    )
+
+    context = {
+        "collections": collections,
+        'categorys': categorys,
+        'products': products,
+        'brands': brands
+    }
+    return render(request, 'products/search_page.html', context)
 
 
 def product_list(request, cat_coll, cat_name):
