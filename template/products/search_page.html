@@ -64,56 +64,18 @@
                             <div class="catagories-menu">
                                 <ul id="menu-content2" class="menu-content collapse show">
                                     <!-- Single Item -->
-                                    <li data-toggle="collapse" data-target="#clothing">
-                                        <a href="#">clothing</a>
-                                        <ul class="sub-menu collapse show" id="clothing">
-                                            <li><a href="#">All</a></li>
-                                            <li><a href="#">Bodysuits</a></li>
-                                            <li><a href="#">Dresses</a></li>
-                                            <li><a href="#">Hoodies &amp; Sweats</a></li>
-                                            <li><a href="#">Jackets &amp; Coats</a></li>
-                                            <li><a href="#">Jeans</a></li>
-                                            <li><a href="#">Pants &amp; Leggings</a></li>
-                                            <li><a href="#">Rompers &amp; Jumpsuits</a></li>
-                                            <li><a href="#">Shirts &amp; Blouses</a></li>
-                                            <li><a href="#">Shirts</a></li>
-                                            <li><a href="#">Sweaters &amp; Knits</a></li>
+                                    {% for clt in collections %}
+                                    <li data-toggle="collapse" data-target="#{{ clt.title|slice:':3' }}">
+                                        <a href="#">{{ clt }}</a>
+                                        <ul class="sub-menu collapse" id="{{ clt.title|slice:':3' }}">
+                                            {% for cat in categorys %}
+                                                {% if clt == cat.which_people %}
+                                                    <li><a href="{% url 'product_list' clt cat %}">{{ cat.title }}</a></li>
+                                                {% endif %}
+                                            {% endfor %}
                                         </ul>
                                     </li>
-                                    <!-- Single Item -->
-                                    <li data-toggle="collapse" data-target="#shoes" class="collapsed">
-                                        <a href="#">shoes</a>
-                                        <ul class="sub-menu collapse" id="shoes">
-                                            <li><a href="#">All</a></li>
-                                            <li><a href="#">Bodysuits</a></li>
-                                            <li><a href="#">Dresses</a></li>
-                                            <li><a href="#">Hoodies &amp; Sweats</a></li>
-                                            <li><a href="#">Jackets &amp; Coats</a></li>
-                                            <li><a href="#">Jeans</a></li>
-                                            <li><a href="#">Pants &amp; Leggings</a></li>
-                                            <li><a href="#">Rompers &amp; Jumpsuits</a></li>
-                                            <li><a href="#">Shirts &amp; Blouses</a></li>
-                                            <li><a href="#">Shirts</a></li>
-                                            <li><a href="#">Sweaters &amp; Knits</a></li>
-                                        </ul>
-                                    </li>
-                                    <!-- Single Item -->
-                                    <li data-toggle="collapse" data-target="#accessories" class="collapsed">
-                                        <a href="#">accessories</a>
-                                        <ul class="sub-menu collapse" id="accessories">
-                                            <li><a href="#">All</a></li>
-                                            <li><a href="#">Bodysuits</a></li>
-                                            <li><a href="#">Dresses</a></li>
-                                            <li><a href="#">Hoodies &amp; Sweats</a></li>
-                                            <li><a href="#">Jackets &amp; Coats</a></li>
-                                            <li><a href="#">Jeans</a></li>
-                                            <li><a href="#">Pants &amp; Leggings</a></li>
-                                            <li><a href="#">Rompers &amp; Jumpsuits</a></li>
-                                            <li><a href="#">Shirts &amp; Blouses</a></li>
-                                            <li><a href="#">Shirts</a></li>
-                                            <li><a href="#">Sweaters &amp; Knits</a></li>
-                                        </ul>
-                                    </li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
@@ -215,52 +177,56 @@
                         {#                        ######  product Body  #######}
                         <div class="row">
                             <!-- Single Product -->
-                            {% for prod in products %}
-                                <div class="col-12 col-sm-6 col-lg-4">
-                                    <div class="single-product-wrapper">
-                                        <!-- Product Image -->
-                                        <div class="product-img">
-                                            {% for img in prod.pro_images.all %}
-                                                {% if forloop.first %}
-                                                    <img src="{{ img.image.url }}" alt="">
-                                                {% endif %}
-                                            <!-- Hover Thumb -->
-                                                <img class="hover-img" src="{{ img.image.url }}" alt="">
-                                            {% endfor %}
-                                            <!-- Product Badge -->
-                                            <div class="product-badge offer-badge">
-                                                <span>-30%</span>
+                            {% if products %}
+                                {% for prod in products %}
+                                    <div class="col-12 col-sm-6 col-lg-4">
+                                        <div class="single-product-wrapper">
+                                            <!-- Product Image -->
+                                            <div class="product-img">
+                                                {% for img in prod.pro_images.all %}
+                                                    {% if forloop.first %}
+                                                        <img src="{{ img.image.url }}" alt="">
+                                                    {% endif %}
+                                                <!-- Hover Thumb -->
+                                                    <img class="hover-img" src="{{ img.image.url }}" alt="">
+                                                {% endfor %}
+                                                <!-- Product Badge -->
+                                                <div class="product-badge offer-badge">
+                                                    <span>-30%</span>
+                                                </div>
+                                                <!-- Favourite -->
+                                                <div class="product-favourite">
+                                                    <a href="#" class="favme fa fa-heart"></a>
+                                                </div>
                                             </div>
-                                            <!-- Favourite -->
-                                            <div class="product-favourite">
-                                                <a href="#" class="favme fa fa-heart"></a>
-                                            </div>
-                                        </div>
 
-                                        <!-- Product Description -->
-                                        <div class="product-description">
-                                            <span>{{ prod.brand }}</span>
-                                            <a href="single-product-details.html">
-                                                <h6>{{ prod.name }}</h6>
-                                            </a>
-                                            <p class="product-price">
-                                                {% if prod.old_price %}
-                                                <span class="old-price">${{ prod.old_price }}</span>
-                                                {% endif %}
-                                                ${{ prod.price }}
-                                            </p>
+                                            <!-- Product Description -->
+                                            <div class="product-description">
+                                                <span>{{ prod.brand }}</span>
+                                                <a href="single-product-details.html">
+                                                    <h6>{{ prod.name }}</h6>
+                                                </a>
+                                                <p class="product-price">
+                                                    {% if prod.old_price %}
+                                                    <span class="old-price">${{ prod.old_price }}</span>
+                                                    {% endif %}
+                                                    ${{ prod.price }}
+                                                </p>
 
-                                            <!-- Hover Content -->
-                                            <div class="hover-content">
-                                                <!-- Add to Cart -->
-                                                <div class="add-to-cart-btn">
-                                                    <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                <!-- Hover Content -->
+                                                <div class="hover-content">
+                                                    <!-- Add to Cart -->
+                                                    <div class="add-to-cart-btn">
+                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            {% endfor %}
+                                {% endfor %}
+                            {% else %}
+                                <h4 class="text-info">Sorry, searching item not found!</h4>
+                            {% endif %}
                         </div>
                     </div>
                     <!-- Pagination -->

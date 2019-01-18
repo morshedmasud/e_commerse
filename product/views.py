@@ -25,7 +25,6 @@ def get_search(request):
     categorys = models.ProductCategory.objects.all()
     brands = models.Brand.objects.all()
     search = request.POST.get('s')
-    print(search)
     products = models.Products.objects.filter(
         Q(name__icontains=search) |
         Q(description__icontains=search) |
@@ -47,11 +46,13 @@ def product_list(request, cat_coll, cat_name):
     categorys = models.ProductCategory.objects.all()
     products = models.Products.objects.filter(for_people__title=cat_coll).filter(category__title=cat_name)
     brands = models.Brand.objects.filter(products__category__title=cat_name)
+
     context = {
         "collections": collections,
         "categorys": categorys,
         "products": products,
         "product_title": cat_name,
-        "brands": brands
+        "brands": brands,
+        "category_for": cat_coll
     }
     return render(request, 'products/product_list.html', context)
