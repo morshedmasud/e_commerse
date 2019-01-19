@@ -39,7 +39,11 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="page-title text-center">
-                        <h2>{{ product_title }}</h2>
+                        {% if product_category %}
+                            <h2>{{ product_category }}</h2>
+                        {% else %}
+                            <h2>{{ brand_name }}</h2>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -65,16 +69,19 @@
                                 <ul id="menu-content2" class="menu-content collapse show">
                                     <!-- Single Item -->
                                     {% for clt in collections %}
-                                    <li data-toggle="collapse" data-target="#{{ clt.title|slice:':3' }}">
-                                        <a href="#">{{ clt }}</a>
-                                        <ul class="sub-menu collapse {% if category_for == clt.title %}show{% endif %}" id="{{ clt.title|slice:':3' }}">
-                                            {% for cat in categorys %}
-                                                {% if clt == cat.which_people %}
-                                                    <li><a href="{% url 'product_list' clt cat %}">{{ cat.title }}</a></li>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </ul>
-                                    </li>
+                                        <li data-toggle="collapse" data-target="#{{ clt.title|slice:':3' }}">
+                                            <a href="#">{{ clt }}</a>
+                                            <ul class="sub-menu collapse {% if category_for == clt.title %}show{% endif %}"
+                                                id="{{ clt.title|slice:':3' }}">
+                                                {% for cat in categorys %}
+                                                    {% if clt == cat.which_people %}
+                                                        <li>
+                                                            <a href="{% url 'product_list' clt cat %}">{{ cat.title }}</a>
+                                                        </li>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
                                     {% endfor %}
                                 </ul>
                             </div>
@@ -132,7 +139,7 @@
                             <div class="widget-desc">
                                 <ul>
                                     {% for brand in brands %}
-                                    <li><a href="#">{{ brand.name }}</a></li>
+                                        <li><a href="{% url 'brand' brand.name %}">{{ brand.name }}</a></li>
                                     {% endfor %}
                                 </ul>
                             </div>
@@ -148,7 +155,7 @@
                                 <div class="product-topbar d-flex align-items-center justify-content-between">
                                     <!-- Total Products -->
                                     <div class="total-products">
-                                        <p><span>{{ products.count }}</span> products found</p>
+                                        <p><span>{{ products|length }}</span> products found</p>
                                     </div>
                                     <!-- Sorting -->
                                     <div class="product-sorting d-flex">
@@ -188,7 +195,7 @@
                                                     {% if forloop.first %}
                                                         <img src="{{ img.image.url }}" alt="">
                                                     {% endif %}
-                                                <!-- Hover Thumb -->
+                                                    <!-- Hover Thumb -->
                                                     <img class="hover-img" src="{{ img.image.url }}" alt="">
                                                 {% endfor %}
                                                 <!-- Product Badge -->
@@ -209,7 +216,7 @@
                                                 </a>
                                                 <p class="product-price">
                                                     {% if prod.old_price %}
-                                                    <span class="old-price">${{ prod.old_price }}</span>
+                                                        <span class="old-price">${{ prod.old_price }}</span>
                                                     {% endif %}
                                                     ${{ prod.price }}
                                                 </p>
@@ -226,24 +233,35 @@
                                     </div>
                                 {% endfor %}
                             {% else %}
-                                <h4 class="text-danger">Opps! sorry, stock out.</h4>
+                                <img class="img-fluid " src="{% static 'img/info-img/sold_out.jpg' %}">
                             {% endif %}
                         </div>
                     </div>
+
                     <!-- Pagination -->
+                    {% if products.has_other_pages %}
                     <nav aria-label="navigation">
                         <ul class="pagination mt-50 mb-70">
-                            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">...</a></li>
-                            <li class="page-item"><a class="page-link" href="#">21</a></li>
-                            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
-                            </li>
+                            {% if products.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page={{ products.previous_page_number }}"><i class="fa fa-angle-left"></i></a></li>
+                            {% else %}
+                                <li class="page-item disabled"><a class="page-link" href="#"><i class="fa fa-angle-left"></i></a></li>
+                            {% endif %}
+                            {% for page in products.paginator.page_range %}
+                                {% if products.number == page %}
+                                    <li class="page-item active"><a class="page-link bg-info" href="#">{{ page }}</a></li>
+                                {% else %}
+                                    <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if products.has_next %}
+                                <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}"><i class="fa fa-angle-right"></i></a></li>
+                            {% else %}
+                                <li class="page-item disabled"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+                            {% endif %}
                         </ul>
                     </nav>
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -176,9 +176,9 @@
 {% block brand_area %}
     <div class="brands-area d-flex align-items-center justify-content-between">
         <!-- Brand Logo -->
-        {% for b in brand %}
+        {% for brand in brands %}
             <div class="single-brands-logo">
-                <a href=""><h4>{{ b.name }}</h4></a>
+                <a href="{% url 'brand' brand.name %}"><h4>{{ brand.name }}</h4></a>
 
                 <!-- <img src="{% static 'img/core-img/brand1.png' %}" alt=""> -->
             </div>
