@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import Q
 from . import models
@@ -81,3 +81,16 @@ def brand_products(request, brand_name):
         "brand_name": brand_name
     }
     return render(request, 'products/product_list.html', context)
+
+
+def single_products(request, id):
+    collections = models.Collection.objects.all()
+    categorys = models.ProductCategory.objects.all()
+    product = get_object_or_404(models.Products, id=id)
+    print(id, product.price)
+    context = {
+        "collections": collections,
+        "categorys": categorys,
+        "product": product
+    }
+    return render(request, 'products/single-product-details.html', context)
