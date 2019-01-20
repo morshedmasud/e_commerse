@@ -3,8 +3,10 @@
 
 
 {% block single_page %}
-    <!-- ##### Single Product Details Area Start ##### -->
-    <section class="single_product_details_area d-flex align-items-center">
+
+
+{#    <!-- ##### Single Product Details Area Start ##### -->#}
+    <section class="single_product_details_area d-flex align-items-center p-5">
 
         <!-- Single Product Thumb -->
         <div class="single_product_thumb clearfix">
@@ -13,42 +15,36 @@
                     <img src="{{ img.image.url }}" alt="">
                 {% endfor %}
             </div>
-            <div class="owl-controls">
-                <div class="owl-nav">
-                    <div class="owl-prev" style=""><img src="{% static 'img/core-img/long-arrow-left.svg' %}" alt="">
-                    </div>
-                    <div class="owl-next" style=""><img src="{% static 'img/core-img/long-arrow-right.svg' %}" alt="">
-                    </div>
-                </div>
-                <div style="display: none;" class="owl-dots"></div>
-            </div>
         </div>
 
         <!-- Single Product Description -->
         <div class="single_product_desc clearfix">
-            <span>mango</span>
+            <span>{{ product.brand }}</span>
             <a href="cart.html">
-                <h2>One Shoulder Glitter Midi Dress</h2>
+                <h2>{{ product.name }}</h2>
             </a>
-            <p class="product-price"><span class="old-price">$65.00</span> $49.00</p>
-            <p class="product-desc">Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean
-                finibus velit id urna vehicula, nec maximus est sollicitudin.</p>
+            <p class="product-price">
+                {% if product.old_price %}
+                    <span class="old-price">${{ product.old_price }}</span>
+                {% endif %}
+                ${{ product.price }}
+            </p>
+            <p class="product-desc">{{ product.description }}</p>
 
             <!-- Form -->
             <form class="cart-form clearfix" method="post">
+                {% csrf_token %}
                 <!-- Select Box -->
                 <div class="select-box d-flex mt-50 mb-30">
                     <select name="select" id="productSize" class="mr-5">
-                        <option value="value">Size: XL</option>
-                        <option value="value">Size: X</option>
-                        <option value="value">Size: M</option>
-                        <option value="value">Size: S</option>
+                        {% for s in product.size_set.all %}
+                        <option value="value">Size: {{ s }}</option>
+                        {% endfor %}
                     </select>
                     <select name="select" id="productColor">
-                        <option value="value">Color: Black</option>
-                        <option value="value">Color: White</option>
-                        <option value="value">Color: Red</option>
-                        <option value="value">Color: Purple</option>
+                        {% for c in product.color_set.all %}
+                            <option value="value">Color: {{ c }}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <!-- Cart & Favourite Box -->
@@ -63,5 +59,5 @@
             </form>
         </div>
     </section>
-    <!-- ##### Single Product Details Area End ##### -->
+{#
 {% endblock %}
