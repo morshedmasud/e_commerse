@@ -21,6 +21,7 @@
 {% endblock %}
 
 
+
 {# for index page #}
 {% block welcome_area %}
     <section class="welcome_area bg-img background-overlay"
@@ -141,7 +142,7 @@
                                     <div class="product-description">
                                         <span>{{ prod.brand }}</span>
                                         <a href="single-product-details.html">
-                                            <h6>{{ prod.name }}</h6>
+                                            <a href="{% url 'single-item' prod.id %}"><h6>{{ prod.name }}</h6></a>
                                         </a>
                                         <p class="product-price">{{ prod.price }}</p>
 

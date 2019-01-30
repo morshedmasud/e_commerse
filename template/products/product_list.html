@@ -10,6 +10,10 @@
 
 {% endblock %}
 
+{% block cart_area %}
+{% endblock %}
+
+
 {#   for index page   #}
 {% block welcome_area %}
 
@@ -211,7 +215,7 @@
                                             <!-- Product Description -->
                                             <div class="product-description">
                                                 <span>{{ prod.brand }}</span>
-                                                <a href="single-product-details.html">
+                                                <a href="{% url 'single-item' prod.id %}">
                                                     <h6>{{ prod.name }}</h6>
                                                 </a>
                                                 <p class="product-price">
@@ -224,9 +228,19 @@
                                                 <!-- Hover Content -->
                                                 <div class="hover-content">
                                                     <!-- Add to Cart -->
-                                                    <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
-                                                    </div>
+                                                    {% if prod in user.profile.ebooks.all %}
+                                                        <div class="add-to-cart-btn">
+                                                            <a href="#" class="btn essence-btn">you own this</a>
+                                                        </div>
+                                                    {% elif prod in current_order_products %}
+                                                        <div class="add-to-cart-btn">
+                                                            <a href="#" class="btn essence-btn">Go to cart</a>
+                                                        </div>
+                                                    {% else %}
+                                                        <div class="add-to-cart-btn">
+                                                            <a href="#" class="btn essence-btn">Add to cart</a>
+                                                        </div>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>

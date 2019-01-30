@@ -1,5 +1,8 @@
-{% block stylesheet %}
+{% extends 'base.html' %}
+{% load static %}
 
+
+{% block stylesheet %}
 {% endblock %}
 
 {% block navbar %}
@@ -17,7 +20,6 @@
 
 {#   for index page   #}
 {% block welcome_area %}
-
 {% endblock %}
 
 {% block small_collection %}
@@ -51,4 +53,8 @@
 {#  single product page #}
 
 {% block single_page %}
+{% endblock %}
+
+{# cart area #}
+{% block cart_area %}
 {% endblock %}

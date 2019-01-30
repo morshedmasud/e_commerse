@@ -3,10 +3,8 @@
 
 
 {% block single_page %}
-
-
-{#    <!-- ##### Single Product Details Area Start ##### -->#}
-    <section class="single_product_details_area d-flex align-items-center p-5">
+    {#    <!-- ##### Single Product Details Area Start ##### -->#}
+    <section class="single_product_details_area d-flex align-items-center py-5">
 
         <!-- Single Product Thumb -->
         <div class="single_product_thumb clearfix">
@@ -32,25 +30,28 @@
             <p class="product-desc">{{ product.description }}</p>
 
             <!-- Form -->
-            <form class="cart-form clearfix" method="post">
+            <form class="cart-form clearfix" action="{% url 'cart:cart_add' product.id %}" method="post">
                 {% csrf_token %}
                 <!-- Select Box -->
+
                 <div class="select-box d-flex mt-50 mb-30">
+
                     <select name="select" id="productSize" class="mr-5">
                         {% for s in product.size_set.all %}
-                        <option value="value">Size: {{ s }}</option>
+                            <option value="value">Size: {{ s }}</option>
                         {% endfor %}
                     </select>
                     <select name="select" id="productColor">
                         {% for c in product.color_set.all %}
                             <option value="value">Color: {{ c }}</option>
                         {% endfor %}
-                    </select>
+                    </select><br>
                 </div>
+                {{ cart_product_form.as_p }}
                 <!-- Cart & Favourite Box -->
                 <div class="cart-fav-box d-flex align-items-center">
                     <!-- Cart -->
-                    <button type="submit" name="addtocart" value="5" class="btn essence-btn">Add to cart</button>
+                    <button type="submit" name="addtocart" value="" class="btn essence-btn">Add to cart</button>
                     <!-- Favourite -->
                     <div class="product-favourite ml-4">
                         <a href="#" class="favme fa fa-heart"></a>
@@ -59,5 +60,4 @@
             </form>
         </div>
     </section>
-{#
 {% endblock %}

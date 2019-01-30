@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block stylesheet %}
+{% endblock %}
+
+{% block navbar %}
+    {% for clt in collections %}
+        <ul class="single-mega cn-col-4">
+            <li class="title">{{ clt.title }}</li>
+            {% for cat in categorys %}
+                {% if clt == cat.which_people %}
+                    <li><a href="">{{ cat.title }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endfor %}
+{% endblock %}
+
+{#   for index page   #}
+{% block welcome_area %}
+{% endblock %}
+
+{% block small_collection %}
+{% endblock %}
+
+{% block body %}
+{% endblock %}
+
+{% block offer_area %}
+{% endblock %}
+
+
+{% block popular_product %}
+{% endblock %}
+
+
+{% block brand_area %}
+{% endblock %}
+
+
+{# for shop page #}
+
+{% block coverpage_shop %}
+{% endblock %}
+
+{% block shob_body %}
+{% endblock %}
+
+
+{#  single product page #}
+
+{% block single_page %}
+{% endblock %}
+
+{# cart area #}
+{% block cart_area %}
+    <h1>Your shopping cart</h1>
+    <table class="cart">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Remove</th>
+            <th>Unit price</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in cart %}
+
+            {% with product=item.product %}
+                <tr>
+                    <td>
+{#                        <img class="img-fluid w-50 h-50 align-middle" src="{{ product.pro_images.first.image.url }}">#}
+
+                    </td>
+                    <td>{{ product.name }}</td>
+                    <td>
+                        <form action="{% url "cart:cart_add" product.id %}" method="post">
+                            {% csrf_token %}
+                            {{ item.update_quantity_form.quantity }}
+                            {{ item.update_quantity_form.update }}
+                            <input type="submit" value="Update">
+
+                        </form>
+                    </td>
+                    <td><a href="{% url "cart:cart_remove" product.id %}">Remove</a></td>
+                    <td class="num">${{ item.price }}</td>
+                    <td class="num">${{ item.total_price }}</td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+        <tr class="total">
+            <td>Total</td>
+            <td colspan="4"></td>
+            <td class="num">${{ cart.get_total_price }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="text-right">
+        <a href="{% url "home" %}" class="button light">Continue shopping</a>
+
+    </p>
+{% endblock %}

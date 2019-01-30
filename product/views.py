@@ -2,10 +2,12 @@ from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import Q
 from . import models
+from cart.forms import CartAddProductForm
 # Create your views here.
 
 
 def index(request):
+    # print(request.session.get('first_name'))
     collections = models.Collection.objects.all()
     categorys = models.ProductCategory.objects.all()
     images = models.Image.objects.all()
@@ -25,7 +27,7 @@ def get_search(request):
     collections = models.Collection.objects.all()
     categorys = models.ProductCategory.objects.all()
     brands = models.Brand.objects.all()
-    search = request.GET.get('s')
+    search = request.GET.get('q')
     products = models.Products.objects.filter(
         Q(name__icontains=search) |
         Q(description__icontains=search) |
@@ -87,10 +89,11 @@ def single_products(request, id):
     collections = models.Collection.objects.all()
     categorys = models.ProductCategory.objects.all()
     product = get_object_or_404(models.Products, id=id)
-    print(id, product.price)
+    cart_product_form = CartAddProductForm()
     context = {
         "collections": collections,
         "categorys": categorys,
-        "product": product
+        "product": product,
+        "cart_product_form": cart_product_form
     }
     return render(request, 'products/single-product-details.html', context)

@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+# from shopping_cart.models import Order
+# from .models import Profile
 
 
 # Create your views here.
@@ -18,3 +20,13 @@ def login(request):
             return redirect('login')
     else:
         return render(request, 'accounts/login.html')
+
+
+# def my_profile(request):
+#     my_user_profile = Profile.objects.filter(user=request.user).first()
+#     my_order = Order.objects.filter(is_ordered=True, owner=my_user_profile)
+#     context = {
+#         'my_order': my_order
+#     }
+#
+#     return render(request, "accounts/profile.html", context)
