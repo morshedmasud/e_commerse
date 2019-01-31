@@ -64,8 +64,9 @@
                                 {% with product=item.product %}
                                     <tr class="">
                                         <td class="product-thumbnail align-middle">
-                                            <a href="{% url 'single-item' product.id %}"><img src="{{ product.pro_images.first.image.url }}" alt="Image"
-                                                            class="img-fluid"></a>
+                                            <a href="{% url 'single-item' product.id %}"><img
+                                                    src="{{ product.pro_images.first.image.url }}" alt="Image"
+                                                    class="img-fluid"></a>
                                         </td>
                                         <td class="product-name align-middle">
                                             <a href="{% url "single-item" product.id %}"><p
@@ -144,9 +145,11 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button class="btn btn-primary btn-lg py-3 btn-block">
-                                        Checkout
-                                    </button>
+                                    <a href="{% url 'orders:order_create' %}">
+                                        <button class="btn btn-primary btn-lg py-3 btn-block">
+                                            Checkout
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
