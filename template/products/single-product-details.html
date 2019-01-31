@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 
 {% block single_page %}
@@ -30,7 +31,7 @@
             <p class="product-desc">{{ product.description }}</p>
 
             <!-- Form -->
-            <form class="cart-form clearfix" action="{% url 'cart:cart_add' product.id %}" method="post">
+            <form class="cart-form clearfix" novalidate action="{% url 'cart:cart_add' product.id %}" method="post">
                 {% csrf_token %}
                 <!-- Select Box -->
 
@@ -47,7 +48,7 @@
                         {% endfor %}
                     </select><br>
                 </div>
-                {{ cart_product_form.as_p }}
+                {{ cart_product_form|crispy }}
                 <!-- Cart & Favourite Box -->
                 <div class="cart-fav-box d-flex align-items-center">
                     <!-- Cart -->
