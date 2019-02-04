@@ -7,18 +7,6 @@
 
 {% endblock %}
 
-{% block navbar %}
-    {% for clt in collections %}
-        <ul class="single-mega cn-col-4">
-            <li class="title">{{ clt.title }}</li>
-            {% for cat in categorys %}
-                {% if clt == cat.which_people %}
-                    <li><a href="{% url 'product_list' cat.title cat.which_people %}">{{ cat.title }}</a></li>
-                {% endif %}
-            {% endfor %}
-        </ul>
-    {% endfor %}
-{% endblock %}
 
 
 

@@ -7,15 +7,10 @@ from cart.forms import CartAddProductForm
 
 
 def index(request):
-    # print(request.session.get('first_name'))
-    collections = models.Collection.objects.all()
-    categorys = models.ProductCategory.objects.all()
     images = models.Image.objects.all()
     brands = models.Brand.objects.all()
     products = models.Products.objects.all()
     context = {
-        "collections": collections,
-        'categorys': categorys,
         "images": images,
         "brands": brands,
         "products": products,
@@ -24,8 +19,6 @@ def index(request):
 
 
 def get_search(request):
-    collections = models.Collection.objects.all()
-    categorys = models.ProductCategory.objects.all()
     brands = models.Brand.objects.all()
     search = request.GET.get('q')
     products = models.Products.objects.filter(
@@ -38,8 +31,6 @@ def get_search(request):
     # page = request.GET.get('page')
     # products_ = paginator.get_page(page)
     context = {
-        "collections": collections,
-        'categorys': categorys,
         'products': products,
         'brands': brands
     }
@@ -47,8 +38,6 @@ def get_search(request):
 
 
 def product_list(request, cat_coll, cat_name):
-    collections = models.Collection.objects.all()
-    categorys = models.ProductCategory.objects.all()
     products = models.Products.objects.filter(for_people__title=cat_coll).filter(category__title=cat_name)
     brands = models.Brand.objects.filter(products__category__title=cat_name)
     paginator = Paginator(products, 6) # show 6 products in one page
@@ -56,8 +45,6 @@ def product_list(request, cat_coll, cat_name):
     products_ = paginator.get_page(page)
 
     context = {
-        "collections": collections,
-        "categorys": categorys,
         "products": products_,
         "product_category": cat_name,
         "brands": brands,
@@ -67,8 +54,6 @@ def product_list(request, cat_coll, cat_name):
 
 
 def brand_products(request, brand_name):
-    collections = models.Collection.objects.all()
-    categorys = models.ProductCategory.objects.all()
     brands = models.Brand.objects.all()
     products = models.Products.objects.filter(brand__name=brand_name)
     paginator = Paginator(products, 10)  # show 6 products in one page
@@ -76,8 +61,6 @@ def brand_products(request, brand_name):
     products_ = paginator.get_page(page)
 
     context = {
-        "collections": collections,
-        "categorys": categorys,
         "products": products_,
         "brands": brands,
         "brand_name": brand_name
@@ -86,13 +69,9 @@ def brand_products(request, brand_name):
 
 
 def single_products(request, id):
-    collections = models.Collection.objects.all()
-    categorys = models.ProductCategory.objects.all()
     product = get_object_or_404(models.Products, id=id)
     cart_product_form = CartAddProductForm()
     context = {
-        "collections": collections,
-        "categorys": categorys,
         "product": product,
         "cart_product_form": cart_product_form
     }

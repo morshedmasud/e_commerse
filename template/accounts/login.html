@@ -4,18 +4,6 @@
 
 {% endblock %}
 
-{% block navbar %}
-    {% for clt in collections %}
-        <ul class="single-mega cn-col-4">
-            <li class="title">{{ clt.title }}</li>
-            {% for cat in categorys %}
-                {% if clt == cat.which_people %}
-                    <li><a href="">{{ cat.title }}</a></li>
-                {% endif %}
-            {% endfor %}
-        </ul>
-    {% endfor %}
-{% endblock %}
 
 {% block body %}
     <div class="container p-5">
@@ -23,14 +11,16 @@
             {% csrf_token %}
             <div class="form-group">
                 <label for="exampleInputEmail1">Your name</label>
-                <input type="text" name="username" class=" form-control rounded-0" id="exampleInputEmail1" aria-describedby="emailHelp"
+                <input type="text" name="username" class=" form-control rounded-0" id="exampleInputEmail1"
+                       aria-describedby="emailHelp"
                        placeholder="Enter your name">
                 {#                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.#}
                 </small>
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="password" name="password" class="form-control rounded-0" id="exampleInputPassword1" placeholder="Password">
+                <input type="password" name="password" class="form-control rounded-0" id="exampleInputPassword1"
+                       placeholder="Password">
             </div>
             <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
