@@ -52,12 +52,12 @@
                                 {% with product=item.product %}
                                     <tr class="">
                                         <td class="product-thumbnail align-middle">
-                                            <a href="{% url 'single-item' product.id %}"><img
+                                            <a href="{{ product.get_absolute_url }}"><img
                                                     src="{{ product.pro_images.first.image.url }}" alt="Image"
                                                     class="img-fluid"></a>
                                         </td>
                                         <td class="product-name align-middle">
-                                            <a href="{% url "single-item" product.id %}"><p
+                                            <a href="{{ product.get_absolute_url }}"><p
                                                     class=" text-black">{{ product.name }}</p></a>
 
                                         </td>
@@ -65,11 +65,12 @@
                                         <td class="align-middle product-color">RED</td>
                                         <td class="align-middle">${{ product.price }}</td>
                                         <td class="align-middle">
+
                                             <form action="{% url "cart:cart_add" product.id %}" method="post">
+                                                {% csrf_token %}
                                                 {{ item.update_quantity_form.quantity }}
                                                 {{ item.update_quantity_form.update }}
                                                 <input type="submit" value="Update">
-                                                {% csrf_token %}
                                             </form>
                                         </td>
                                         <td class="align-middle">${{ item.total_price }}</td>
@@ -88,7 +89,7 @@
                 <div class="col-md-6">
                     <div class="row mb-5">
                         <div class="col-md-6">
-                            <a href="{% url 'home' %}">
+                            <a href="{% url 'product:home' %}">
                                 <button class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</button>
                             </a>
                         </div>

@@ -30,4 +30,3 @@ def cart_detail(request):
             'quantity': item['quantity'],
             'update': True})
     return render(request, 'cart/cart_detail.html', {'cart': cart})
-    # return HttpResponse("hollo")

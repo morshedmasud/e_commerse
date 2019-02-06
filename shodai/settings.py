@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'shodai.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': "shodai_postgres",
         'USER': 'postgres',
         'PASSWORD': '12345',

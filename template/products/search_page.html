@@ -68,7 +68,7 @@
                                         <ul class="sub-menu collapse" id="{{ clt.title|slice:':3' }}">
                                             {% for cat in categorys %}
                                                 {% if clt == cat.which_people %}
-                                                    <li><a href="{% url 'product_list' clt cat %}">{{ cat.title }}</a></li>
+                                                    <li><a href="{% url 'product:product_list' clt cat %}">{{ cat.title }}</a></li>
                                                 {% endif %}
                                             {% endfor %}
                                         </ul>
@@ -130,7 +130,7 @@
                             <div class="widget-desc">
                                 <ul>
                                     {% for brand in brands %}
-                                        <li><a href="{% url 'brand' brand.name %}">{{ brand.name }}</a></li>
+                                        <li><a href="{% url 'product:brand' brand.name %}">{{ brand.name }}</a></li>
                                     {% endfor %}
                                 </ul>
                             </div>
@@ -201,7 +201,7 @@
                                             <!-- Product Description -->
                                             <div class="product-description">
                                                 <span>{{ prod.brand }}</span>
-                                                <a href="{% url 'single-item' prod.id %}">
+                                                <a href="{{ prod.get_absolute_url }}">
                                                     <h6>{{ prod.name }}</h6>
                                                 </a>
                                                 <p class="product-price">

@@ -68,8 +68,8 @@ def brand_products(request, brand_name):
     return render(request, 'products/product_list.html', context)
 
 
-def single_products(request, id):
-    product = get_object_or_404(models.Products, id=id)
+def single_products(request, id, slug):
+    product = get_object_or_404(models.Products, id=id, slug=slug, available=True)
     cart_product_form = CartAddProductForm()
     context = {
         "product": product,

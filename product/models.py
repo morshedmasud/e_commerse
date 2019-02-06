@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 
@@ -27,18 +28,28 @@ class Brand(models.Model):
 
 
 class Products(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, db_index=True)
+    slug = models.SlugField(max_length=200, db_index=True)
     for_people = models.ForeignKey(Collection, on_delete=models.CASCADE)
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField()
     old_price = models.FloatField(null=True, blank=True)
     price = models.FloatField()
+    available = models.BooleanField(default=True)
+    stock = models.PositiveIntegerField()
     input_date = models.DateTimeField(auto_now=False, auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True, auto_now_add=False)
 
+    class Meta:
+        ordering = ('name', )
+        index_together = (('id', 'slug'),)
+
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('product:single-item', args=[self.id, self.slug])
 
 
 class Image(models.Model):

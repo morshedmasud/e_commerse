@@ -15,36 +15,6 @@
 {% endblock %}
 
 {% block body %}
-{% endblock %}
-
-{% block offer_area %}
-{% endblock %}
-
-
-{% block popular_product %}
-{% endblock %}
-
-
-{% block brand_area %}
-{% endblock %}
-
-
-{# for shop page #}
-
-{% block coverpage_shop %}
-{% endblock %}
-
-{% block shob_body %}
-{% endblock %}
-
-
-{#  single product page #}
-
-{% block single_page %}
-{% endblock %}
-
-{# cart area #}
-{% block cart_area %}
     <h1>Your shopping cart</h1>
     <table class="cart">
         <thead>
@@ -90,7 +60,37 @@
         </tbody>
     </table>
     <p class="text-right">
-        <a href="{% url "home" %}" class="button light">Continue shopping</a>
-
+        <a href="{% url "product:home" %}" class="button light">Continue shopping</a>
     </p>
+{% endblock %}
+
+{% block offer_area %}
+{% endblock %}
+
+
+{% block popular_product %}
+{% endblock %}
+
+
+{% block brand_area %}
+{% endblock %}
+
+
+{# for shop page #}
+
+{% block coverpage_shop %}
+{% endblock %}
+
+{% block shob_body %}
+{% endblock %}
+
+
+{#  single product page #}
+
+{% block single_page %}
+{% endblock %}
+
+{# cart area #}
+{% block cart_area %}
+
 {% endblock %}

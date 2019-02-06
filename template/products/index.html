@@ -130,7 +130,7 @@
                                     <div class="product-description">
                                         <span>{{ prod.brand }}</span>
                                         <a href="single-product-details.html">
-                                            <a href="{% url 'single-item' prod.id %}"><h6>{{ prod.name }}</h6></a>
+                                            <a href="{{ prod.get_absolute_url }}"><h6>{{ prod.name }}</h6></a>
                                         </a>
                                         <p class="product-price">{{ prod.price }}</p>
 
@@ -167,7 +167,7 @@
         <!-- Brand Logo -->
         {% for brand in brands %}
             <div class="single-brands-logo">
-                <a href="{% url 'brand' brand.name %}"><h4>{{ brand.name }}</h4></a>
+                <a href="{% url 'product:brand' brand.name %}"><h4>{{ brand.name }}</h4></a>
 
                 <!-- <img src="{% static 'img/core-img/brand1.png' %}" alt=""> -->
             </div>

@@ -37,7 +37,9 @@ class ProductColorAdmin(admin.TabularInline):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'for_people', 'category', 'price', 'input_date']
+    list_display = ['name', 'slug', 'stock', 'available', 'for_people', 'category', 'price', 'input_date']
+    list_editable = ['price', 'stock', 'available']
+    prepopulated_fields = {'slug': ('name',)}
     inlines = [ProductImageInline, ProductSizeInline, ProductColorAdmin]
 
     class Meta:

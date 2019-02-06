@@ -35,7 +35,7 @@
         <!-- Classy Menu -->
         <nav class="classy-navbar" id="essenceNav">
             <!-- Logo -->
-            <a class="nav-brand" href="{% url 'home' %}"><img src="{% static 'img/core-img/logo.pn' %}"
+            <a class="nav-brand" href="{% url 'product:home' %}"><img src="{% static 'img/core-img/logo.pn' %}"
                                                               alt="সদাই"></a>
             <!-- Navbar Toggler -->
             <div class="classy-navbar-toggler">
@@ -59,7 +59,7 @@
                                         {% for cat in categorys %}
                                             {% if clt == cat.which_people %}
                                                 <li>
-                                                    <a href="{% url 'product_list' clt cat %}">{{ cat.title }}</a>
+                                                    <a href="{% url 'product:product_list' clt cat %}">{{ cat.title }}</a>
                                                 </li>
                                             {% endif %}
                                         {% endfor %}
@@ -95,7 +95,7 @@
         <div class="header-meta d-flex clearfix justify-content-end">
             <!-- Search Area -->
             <div class="search-area">
-                <form action="{% url 'get_search' %}" method="GET">
+                <form action="{% url 'product:get_search' %}" method="GET">
                     {% csrf_token %}
                     <input type="text" name="q" id="headerSearch" placeholder="Type for search" ,
                            value="{{ request.GET.q }}">
