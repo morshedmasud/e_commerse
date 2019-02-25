@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 
 
 <!DOCTYPE html>
@@ -20,6 +21,7 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/core-style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
     <link rel="stylesheet" href="{% static 'style.css' %}">
 
     {% block stylesheet %}
@@ -36,7 +38,7 @@
         <nav class="classy-navbar" id="essenceNav">
             <!-- Logo -->
             <a class="nav-brand" href="{% url 'product:home' %}"><img src="{% static 'img/core-img/logo.pn' %}"
-                                                              alt="সদাই"></a>
+                                                                      alt="সদাই"></a>
             <!-- Navbar Toggler -->
             <div class="classy-navbar-toggler">
                 <span class="navbarToggler"><span></span><span></span><span></span></span>
@@ -108,8 +110,12 @@
             </div>
             <!-- User Login Info -->
             <div class="user-login-info">
-                <a href="{% url 'login' %}"><img src="{% static 'img/core-img/user.svg' %}" alt=""></a>
-
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'account:editProfile' %}"><img src="{% static 'img/core-img/user.svg' %}"
+                                                                   alt=""></a>
+                {% else %}
+                    <a href="{% url 'account:login' %}"><img src="{% static 'img/core-img/user.svg' %}" alt=""></a>
+                {% endif %}
             </div>
             <!-- Cart Area -->
             <div class="cart-area">

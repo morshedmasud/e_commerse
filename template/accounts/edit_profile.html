@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block body %}
+    <div class="container py-5">
+        <div class="row">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ user_form }}
+                {{ profile_form }}
+
+                <input type="submit" value="Save Changes" class="btn btn-success">
+
+{#                <div class="row">#}
+{#                    <div class="col-6">#}
+{#                        {% crispy user_form %}#}
+{#                    </div>#}
+{#                    <div class="col-6">#}
+{#                        {% crispy profile_form %}#}
+{#                        <input type="submit" value="Save Changes" class="btn btn-success">#}
+{#                    </div>#}
+{#                </div>#}
+
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
