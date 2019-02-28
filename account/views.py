@@ -50,6 +50,8 @@ def get_registration(request):
 @login_required
 def user_profile(request):
     user = get_object_or_404(User, id=request.user.id)
+    pro = get_object_or_404(Profile, user=user)
+    print(pro.phone)
     context = {
         'user': user,
     }
@@ -65,7 +67,7 @@ def edit_profile(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            return redirect('product:home')
+            return redirect('account:profile')
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
