@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Profile
 from .forms import RegistrationForm, ProfileEditForm, UserEditForm
@@ -47,6 +48,16 @@ def get_registration(request):
 
 
 @login_required
+def user_profile(request):
+    user = get_object_or_404(User, id=request.user.id)
+    context = {
+        'user': user,
+    }
+    return render(request, 'accounts/profile.html', context)
+
+
+
+@login_required
 def edit_profile(request):
     if request.method == "POST":
         user_form = UserEditForm(data=request.POST or None, instance=request.user)
@@ -54,6 +65,7 @@ def edit_profile(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
+            return redirect('product:home')
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)

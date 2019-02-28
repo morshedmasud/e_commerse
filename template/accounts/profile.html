@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-4 text-center">
+                {% if user.profile.photo %}
+                    <img class="img-fluid rounded-circle" src="{{ user.profile.photo.url }}" alt="img">
+                {% else %}
+                    <img src="{% static 'img/core-img/user_img.svg' %}" alt="">
+                {% endif %}
+                <small class="lead">@ {{ user }}</small>
+                <br>
+                <small>{{ user.email }}</small>
+                <h3>{{ user.first_name|upper }} {{ user.last_name|upper }}</h3>
+                <h6>{{ user.profile.address }}</h6>
+                <a class="btn btn-outline-warning" href="{% url 'account:editProfile' %}">Edit Profile</a>
+                <br>
+                <a class="btn btn-outline-primary btn-sm mt-3" href="{% url 'account:logout' %}">Log out</a>
+{#                <button class="btn btn-outline-warning"><a href="{% url 'account:editProfile' %}">Edit Profile</a></button>#}
+            </div>
+            <div class="col-8 justify-content-center text-center">
+                <h3>Your orders</h3>
+            </div>
+        </div>
+    </div>
+{% endblock %}

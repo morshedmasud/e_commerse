@@ -43,9 +43,29 @@ class UserEditForm(forms.ModelForm):
             'last_name',
             'email'
         ]
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+        }
 
 
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = ('user', )
+        # fields = [
+        #     'address',
+        #     'phone',
+        #     'photo',
+        #     'dob'
+        # ]
+        widgets = {
+            'address': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.NumberInput(attrs={'class': 'form-control'}),
+            'photo': forms.FileInput(attrs={'class': 'form-control'}),
+            'dob': forms.DateInput(attrs={'class': 'form-control'}),
+        }
+
+

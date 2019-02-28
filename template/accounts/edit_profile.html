@@ -7,21 +7,37 @@
         <div class="row">
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ user_form }}
-                {{ profile_form }}
+                <div class="row">
+                    <div class="col-6">
+                        {{ user_form.as_p }}
+                    </div>
+                    <div class="col-6">
+                        {{ profile_form.as_p }}
+                    </div>
+                </div>
 
-                <input type="submit" value="Save Changes" class="btn btn-success">
-
-{#                <div class="row">#}
-{#                    <div class="col-6">#}
-{#                        {% crispy user_form %}#}
-{#                    </div>#}
-{#                    <div class="col-6">#}
-{#                        {% crispy profile_form %}#}
-{#                        <input type="submit" value="Save Changes" class="btn btn-success">#}
-{#                    </div>#}
-{#                </div>#}
-
+                <input class="btn bg-info" type="submit" value="Save Changes">
+                {#                <div class="row">#}
+                {#                    <div class="col-6">#}
+                {#                        {%  profile_form%}#}
+                {#                        <input type="submit" value="Save Change">#}
+                {#                    </div>#}
+                {#                    <div class="col-6">#}
+                {#                        {% crispy user_form %}#}
+                {#                    </div>#}
+                {##}
+                {#                </div>#}
+                {##}
+                {#                <div class="col-6">#}
+                {#                    {{ profile_form }}#}
+                {#                    {% crispy profile_form %}#}
+                {#                </div>#}
+                {#                <div class="col-6">#}
+                {#                    {{ user_form }}#}
+                {#                    {% crispy user_form %}#}
+                {#                    <input type="submit" value="Save Change">#}
+                {##}
+                {#                </div>#}
             </form>
         </div>
     </div>

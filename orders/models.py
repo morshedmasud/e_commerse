@@ -1,9 +1,10 @@
 from django.db import models
 from product.models import Products
-# Create your models here.
+from django.contrib.auth.models import User
 
 
 class Order(models.Model):
+    user_order = models.ForeignKey(User, related_name='user_orders', on_delete=models.CASCADE, null=True, blank=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
