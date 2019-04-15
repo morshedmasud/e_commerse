@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
+from orders.models import Order
 from .models import Profile
 from .forms import RegistrationForm, ProfileEditForm, UserEditForm
 
@@ -51,7 +52,10 @@ def get_registration(request):
 def user_profile(request):
     user = get_object_or_404(User, id=request.user.id)
     pro = get_object_or_404(Profile, user=user)
-    print(pro.phone)
+    print(user, pro)
+    # orders = get_object_or_404(Order, id=user.id)
+    # order = Order.objects.filter(id=user.id)
+    # print(orders.last_name, 'and', order)
     context = {
         'user': user,
     }
