@@ -4,6 +4,7 @@ from account.models import Profile
 
 
 class Order(models.Model):
+    order_number = models.CharField(max_length=1000, blank=True, null=True)
     user_order = models.ForeignKey(Profile, related_name='user_order', on_delete=models.CASCADE, null=True, blank=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
