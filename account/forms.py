@@ -4,7 +4,7 @@ from .models import Profile
 
 
 class RegistrationForm(forms.ModelForm):
-    phone = forms.DecimalField(widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Confirm Password...',}))
+    phone = forms.DecimalField(widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter you phone number...',}))
     email = forms.EmailField(max_length=200, widget=forms.EmailInput(attrs={'class': 'form-control'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter Password Here...',}))
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirm Password...',}))
@@ -17,6 +17,7 @@ class RegistrationForm(forms.ModelForm):
             'last_name',
             'email',
             'phone'
+
         )
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control'}),

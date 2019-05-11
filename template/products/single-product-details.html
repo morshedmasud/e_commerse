@@ -18,8 +18,8 @@
 
         <!-- Single Product Description -->
         <div class="single_product_desc clearfix">
-            <span>{{ product.brand }}</span>
-            <a href="cart.html">
+            <span><a href="{{ product.brand.get_absolute_url }}">{{ product.brand }}</a></span>
+            <a href="#">
                 <h2>{{ product.name }}</h2>
             </a>
             <p class="product-price">
@@ -31,7 +31,7 @@
             <p class="product-desc">{{ product.description }}</p>
 
             <!-- Form -->
-            <form class="cart-form clearfix"  action="{% url 'cart:cart_add' product.id %}" method="post" novalidate>
+            <form class="cart-form clearfix" action="{% url 'cart:cart_add' product.id %}" method="post" novalidate>
                 {% csrf_token %}
                 <!-- Select Box -->
 
@@ -52,7 +52,15 @@
                 <!-- Cart & Favourite Box -->
                 <div class="cart-fav-box d-flex align-items-center">
                     <!-- Cart -->
-                    <button type="submit" name="addtocart" value="" class="btn essence-btn">Add to cart</button>
+                    {% for i in cart %}
+                        {% if i.product.name == product.name %}
+
+                            <a class="btn essence-btn" href="#" onclick="myFunction()" type="text">Add</a>
+
+                        {% else %}
+                            <button type="submit" name="addtocart" value="" class="btn essence-btn">Add to cart</button>
+                        {% endif %}
+                    {% endfor %}
                     <!-- Favourite -->
                     <div class="product-favourite ml-4">
                         <a href="#" class="favme fa fa-heart"></a>
@@ -61,4 +69,12 @@
             </form>
         </div>
     </section>
+{% endblock %}
+
+{% block script %}
+    <script>
+        function myFunction() {
+            alert("Hello! I am an alert box!");
+        }
+    </script>
 {% endblock %}
